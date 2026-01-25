@@ -6,11 +6,11 @@
 |------------|---------------------------------------|
 | Team       | Group 3                               |
 | Title      | Bin Buddy                             |
-| Members    | HTOO MYAT NOE (U2422977K)             |
+| Members    | SOH CEK CONG (U2423500C)              |
+|            | HTOO MYAT NOE (U2422977K)             |
 |            | ARMAN KHAN (U2421760A)                |
 |            | CHUA YUE JUN (U2423015D)              |
 |            | NIKHIL MADETI (U2421243D)             |
-|            | SOH CEK CONG (U2423500C)              |
 |            | YOONG HONG JUN, NICHOLAS (U2321582L)  |
 
 
