@@ -1,19 +1,6 @@
 # SC2006 - Software Engineering
 # Bin Buddy - An E-waste Recycling App
 
-
-| Lab Group  | SCSI                                  |
-|------------|---------------------------------------|
-| Team       | Group 3                               |
-| Title      | Bin Buddy                             |
-| Members    | SOH CEK CONG (U2423500C)              |
-|            | HTOO MYAT NOE (U2422977K)             |
-|            | ARMAN KHAN (U2421760A)                |
-|            | CHUA YUE JUN (U2423015D)              |
-|            | NIKHIL MADETI (U2421243D)             |
-|            | YOONG HONG JUN, NICHOLAS (U2321582L)  |
-
-
 # Demo Video
 [![Watch on YouTube](https://img.shields.io/badge/▶%20Watch%20Demo%20Video-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=LX0xQ9jAtFc)
 
@@ -43,30 +30,27 @@ Features
 - Mail Service: SendGrid SMTP
 - Session Management: express-session + connect-mongo
 
-🧑‍💻 Setup Instructions
-Follow these steps to set up the project on your own system or server.
+# Setup Instructions
 
-1️⃣ Clone the repository
 
-git clone https://github.com/softwarelab3/2006-SCSI-28.git
+1) Clone the repository
+
+git clone https://github.com/CekCong/Bin-Buddy-Application.git
 
 cd 2006-SCSI-28
 
-2️⃣ Install dependencies
-Make sure you have Node.js (v18+) and npm installed.
-Then install all required packages:
+2) Install dependencies
 
 npm install
 
-3️⃣ Configure Environment Variables
-Create a .env file in the project root and copy the following keys: <br><br>
-//COPY the key from the env file (cannt be found on github) <br><br>
+3️) Configure Environment Variables
+
 SENDGRID_API_KEY=XXXXXXXXX <br><br>
 EMAIL_USER=noreply.binbuddy.test@gmail.com <br><br>
 ADMIN_CODE="BINBUDDY2025" <br><br>
 GOOGLE_MAPS_API_KEY=XXXXXXXXX <br><br>
 MONGO_URI=mongodb+srv://admin:pass@sc2006ewastebins.XXXXXXXXXXXXXXXXXX <br><br>
-//END HERE
+
 
 # Map API (Google Maps)
 - GOOGLE_MAPS_API_KEY=your_api_key_here
@@ -80,14 +64,11 @@ MONGO_URI=mongodb+srv://admin:pass@sc2006ewastebins.XXXXXXXXXXXXXXXXXX <br><br>
 - ADMIN_CODE=your_admin_invite_code
 
 
-📝 Tips:
-- Get your MongoDB connection URI from MongoDB Atlas
-- Get a SendGrid API key from SendGrid Dashboard
-- The EMAIL_USER must be a verified sender in SendGrid.
+# Get your MongoDB connection URI from MongoDB Atlas
 
-4️⃣ Run the server
 
-Start the development server with:
+4️) Run the server
+
 
 npm run dev
 
@@ -97,35 +78,17 @@ node app.js
 
 
 The app should now be running at:
-👉 http://localhost:3000
+http://localhost:3000
 
-5️⃣ Test Email Functionality
+5️) Test Email Functionality
 The system uses SendGrid to send password reset links.
 To test it:
 - Register a user with your own email.
 - Go to /forgotpassword.
 - Check your inbox for the reset link.
 
-🔒 Admin Access
-To create an admin account:
+6) To create an admin account:
 - During registration, enter the same ADMIN_CODE you configured in .env.
 - Admins can access the admin dashboard at: /admin/dashboard
 
-🧹 Useful Scripts
-Command	Description
-npm start:	Start the server
-npm run dev:	Start server with nodemon for live reload
-npm install: Install dependencies
-npm audit fix:	Fix security issues
-
-
-Common Issues
-- Problem: ERR_TOO_MANY_REDIRECTS
-👉 Clear cookies or check for infinite redirect loops in ensureAuthenticated() logic.
-
-- Problem: “Cannot send email”
-👉 Verify your SENDGRID_API_KEY and ensure your sender email is verified.
-
-- Problem: “MongoNetworkError: connection refused”
-👉 Ensure MongoDB URI is correct and accessible.
 
