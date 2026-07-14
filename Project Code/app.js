@@ -4,8 +4,10 @@ const { create } = require('express-handlebars');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
+
 require('dotenv').config();
 
 const hbsHelpers = require('./helpers/hbs');
@@ -18,8 +20,6 @@ const articleRoutes = require('./routes/articleRoutes');
 const mapRoutes = require('./routes/mapRoutes');
 const adminQueryRoutes = require('./routes/adminQueryRoutes');
 
-
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -30,10 +30,10 @@ const hbs = create({
     partialsDir: path.join(__dirname, 'views', 'partials'),
     helpers: {
         ...hbsHelpers,
-        eq: function(a, b) {
+        eq(a, b) {
             return a === b;
         },
-        json: function(context) {
+        json(context) {
             return JSON.stringify(context);
         }
     }
@@ -42,28 +42,46 @@ const hbs = create({
 app.engine('.handlebars', hbs.engine);
 app.set('view engine', '.handlebars');
 app.set('views', path.join(__dirname, 'views'));
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-const MONGO_URI = process.env.MONGO_URI
-mongoose.connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log('MongoDB connected successfully');
-}).catch(err => {
-    console.error('MongoDB connection error:', err);
-    process.exit(1);
-});
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+    throw new Error('MONGO_URI is not configured');
+}
+
+mongoose.connect(MONGO_URI)
+    .then(() => {
+        console.log('MongoDB connected successfully');
+    })
+    .catch((err) => {
+        console.error('MongoDB connection error:', err);
+    });
+
+app.set('trust proxy', 1);
+
 app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: MONGO_URI
+    }),
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        sameSite: 'lax',
+        maxAge: 24 * 60 * 60 * 1000
+    }
 }));
 
 app.use(flash());
+
 app.use((req, res, next) => {
     if (req.session.user) {
         res.locals.user = {
@@ -73,14 +91,14 @@ app.use((req, res, next) => {
             isAdmin: req.session.user.isAdmin
         };
     }
+
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     res.locals.info_msg = req.flash('info_msg');
+
     next();
 });
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', mainRoute);
 app.use('/', authRoute);
@@ -91,6 +109,10 @@ app.use('/articles', articleRoutes);
 app.use('/map', mapRoutes);
 app.use('/adminQuery', adminQueryRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server started at http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
