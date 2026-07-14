@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "E-waste Bin Map App",
   "main": "app.js",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
