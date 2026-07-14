@@ -30,14 +30,14 @@ Features
 - Mail Service: SendGrid SMTP
 - Session Management: express-session + connect-mongo
 
-# Setup Instructions
+# Local Setup Instructions
 
 
 1) Clone the repository
 
 git clone https://github.com/CekCong/Bin-Buddy-Application.git
 
-cd 2006-SCSI-28
+cd Project_Code
 
 2) Install dependencies
 
@@ -45,27 +45,16 @@ npm install
 
 3️) Configure Environment Variables
 
-SENDGRID_API_KEY=XXXXXXXXX <br><br>
-EMAIL_USER=noreply.binbuddy.test@gmail.com <br><br>
-ADMIN_CODE="BINBUDDY2025" <br><br>
-GOOGLE_MAPS_API_KEY=XXXXXXXXX <br><br>
-MONGO_URI=mongodb+srv://admin:pass@sc2006ewastebins.XXXXXXXXXXXXXXXXXX <br><br>
-
-
-# Map API (Google Maps)
-- GOOGLE_MAPS_API_KEY=your_api_key_here
-- Ensure Map, Geolocation and Directions services are enabled
-
-# Email Configuration (SendGrid)
-- SENDGRID_API_KEY=your_sendgrid_api_key_here
-- EMAIL_USER=your_verified_sendgrid_sender_email
-
-# Optional Admin Code for privileged accounts
-- ADMIN_CODE=your_admin_invite_code
-
-
-# Get your MongoDB connection URI from MongoDB Atlas
-
+```env
+PORT=3000
+NODE_ENV=development
+SESSION_SECRET= random_session_secret
+SENDGRID_API_KEY = your_sendgrid_api_key 
+EMAIL_USER= your_verified_sender_email 
+ADMIN_CODE="BINBUDDY2025" 
+GOOGLE_MAPS_API_KEY = your_google_maps_api_key 
+MONGO_URI = your_mongodb_connection_uri
+```
 
 4️) Run the server
 
