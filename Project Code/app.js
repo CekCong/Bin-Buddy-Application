@@ -4,7 +4,7 @@ const { create } = require('express-handlebars');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const { MongoStore } = require('connect-mongo');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
 
