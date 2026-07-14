@@ -3,7 +3,7 @@
 
 ## Live Website
 
-🌐 **Application:** https://your-project-name.vercel.app
+🌐 **Application:** https://bin-buddy-application.vercel.app/
 
 # Demo Video
 [![Watch on YouTube](https://img.shields.io/badge/▶%20Watch%20Demo%20Video-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=LX0xQ9jAtFc)
